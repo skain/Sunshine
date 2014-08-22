@@ -47,9 +47,12 @@ public class MainActivity extends ActionBarActivity {
             String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
             intent = new Intent(Intent.ACTION_VIEW);
             Uri geoLoc = Uri.parse("geo:0,0?q=" + location);
-            Utils.MakeToast(this, geoLoc.toString());
+            intent.setData(geoLoc);
+//            Utils.MakeToast(this, geoLoc.toString());
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
+            } else {
+                Utils.MakeToast(this, "Could not find map intent target.");
             }
         }
         else {
