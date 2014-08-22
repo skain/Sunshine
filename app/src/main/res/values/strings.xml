@@ -9,4 +9,9 @@
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key">location</string>
     <string name="pref_location_default">chicago</string>
+    <string name="pref_units_label">Units</string>
+    <string name="pref_units_default">Imperial</string>
+    <string name="pref_units_alternate">Metric</string>
+    <string name="pref_units_key">units</string>
+    <string name="pref_units_desc">Fahrenheit or Celsius</string>
 </resources>

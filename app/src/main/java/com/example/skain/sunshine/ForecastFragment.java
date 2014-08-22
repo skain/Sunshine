@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,8 +81,11 @@ public class ForecastFragment extends Fragment {
 
     private void doRefresh() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_label), getString(R.string.pref_location_default));
-        new FetchWeatherTask().execute(location);
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+        String units = prefs.getString(getString(R.string.pref_units_key), "Imperial");
+        Toast.makeText(getActivity().getApplicationContext(),
+                        "Location: " + location + "/" + units, Toast.LENGTH_SHORT).show();
+                new FetchWeatherTask().execute(location);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -288,11 +292,22 @@ public class ForecastFragment extends Fragment {
                 double high = temperatureObject.getDouble(OWM_MAX);
                 double low = temperatureObject.getDouble(OWM_MIN);
 
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String units = prefs.getString(getString(R.string.pref_units_key), "Imperial");
+
+                if (units.equals("Imperial")) {
+                    high = convertMetricToImperial(high);
+                    low = convertMetricToImperial(low);
+                }
                 highAndLow = formatHighLows(high, low);
                 resultStrs[i] = day + " - " + description + " - " + highAndLow;
             }
 
             return resultStrs;
+        }
+
+        private Double convertMetricToImperial(double val) {
+            return ((val * 9) / 5) + 32;
         }
     }
 }

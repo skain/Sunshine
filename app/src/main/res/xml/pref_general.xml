@@ -8,4 +8,12 @@
         android:inputType="text"
         android:singleLine="true">
     </EditTextPreference>
+    <ListPreference
+        android:title="@string/pref_units_label"
+        android:key="@string/pref_units_key"
+        android:entries="@array/unit_entries"
+        android:entryValues="@array/unit_entries"
+        android:summary="@string/pref_units_desc"
+        android:defaultValue="@string/pref_units_default"
+        ></ListPreference>
 </PreferenceScreen>
