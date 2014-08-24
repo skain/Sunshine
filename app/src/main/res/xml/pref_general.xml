@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
         android:title="@string/pref_location_label"
         android:key="@string/pref_location_key"
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
-        android:singleLine="true">
-    </EditTextPreference>
+        android:singleLine="true" />
+
     <ListPreference
         android:title="@string/pref_units_label"
         android:key="@string/pref_units_key"
-        android:entries="@array/unit_entries"
-        android:entryValues="@array/unit_entries"
-        android:summary="@string/pref_units_desc"
-        android:defaultValue="@string/pref_units_default"
-        ></ListPreference>
+        android:defaultValue="@string/pref_units_metric"
+        android:entryValues="@array/pref_units_values"
+        android:entries="@array/pref_units_options" />
+
 </PreferenceScreen>
